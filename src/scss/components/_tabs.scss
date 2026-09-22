@@ -1,0 +1,55 @@
+@use "./settings" as *;
+@use "./helpers/_mixins" as *;
+
+.tabs {
+	border: solid 1px var(--light-grey);
+
+	// .tabs__navigation
+	&__navigation {
+		display: flex;
+		gap: 0;
+	}
+
+	// .tabs__title
+	&__title {
+		flex-grow: 1;
+		cursor: pointer;
+		padding: 25px 20px;
+		transition: var(--transition-duration, 0.3s);
+		border: 0;
+		background-color: var(--dark);
+		color: var(--white);
+
+		&.active {
+			pointer-events: none;
+			user-select: none;
+			background-color: var(--accent-color);
+			color: var(--dark);
+		}
+
+		&:not(.active) {
+			@media (any-hover: hover) {
+				&:hover {
+					color: var(--blue);
+				}
+			}
+		}
+
+		@media (max-width: $hd) {
+			padding: 15px;
+		}
+	}
+
+	// .tabs__content
+	&__content {
+		padding: 20px;
+		background-color: var(--accent-color);
+	}
+
+	// .tabs__body
+	&__body {
+		&:not(.show) {
+			display: none;
+		}
+	}
+}

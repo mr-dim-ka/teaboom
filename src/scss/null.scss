@@ -1,0 +1,217 @@
+@use "./settings" as *;
+
+*,
+*::before,
+*::after {
+	// border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+*::before,
+*::after {
+	display: inline-block;
+}
+
+*:empty {
+	margin: 0 !important;
+}
+
+:focus,
+:active {
+	// outline: none;
+}
+
+// Для доступности фокуса
+:focus-visible {
+	// outline: 2px dashed var(--focus-color, #00f);
+	// outline-offset: 2px;
+}
+
+html,
+body {
+	min-width: #{$minWidth}px;
+	height: 100%;
+}
+
+html {
+	// scrollbar-gutter: stable;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+}
+
+body {
+	font-family: var(--font-family);
+	font-size: var(--font-size);
+	line-height: 1.1;
+	color: var(--main-color);
+	accent-color: var(--accent-color);
+	text-rendering: auto;
+	text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+input,
+button,
+select,
+textarea {
+	font: inherit;
+	color: inherit;
+	background-color: transparent;
+	border: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+textarea {
+	width: 100%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+textarea {
+	resize: vertical;
+}
+
+a,
+button,
+input,
+textarea {
+	transition: var(--transition-duration);
+}
+
+label {
+	display: inline-block;
+	cursor: pointer;
+}
+
+button,
+select,
+option {
+	cursor: pointer;
+}
+
+a {
+	display: inline-block;
+	color: inherit;
+
+	&:where(:link, :visited, :hover) {
+		text-decoration: none;
+		text-underline-offset: 0.25em;
+	}
+
+	&:focus,
+	&:active {
+	}
+
+	&[href^="mailto"],
+	&[href^="tel"] {
+		white-space: nowrap;
+		text-decoration: none;
+	}
+}
+
+ul {
+	list-style: none;
+}
+
+img,
+picture,
+video {
+	display: inline-block;
+	vertical-align: top;
+	max-width: 100%;
+	height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	font: inherit;
+	text-rendering: optimizeLegibility;
+}
+
+svg {
+	display: inline-block;
+	vertical-align: top;
+	transition: inherit;
+
+	* {
+		transition: inherit;
+	}
+
+	path[stroke] {
+		stroke: currentColor;
+	}
+
+	path[fill] {
+		fill: currentColor;
+	}
+}
+
+span {
+}
+
+b {
+}
+
+small {
+	font-size: 80%;
+}
+
+sub,
+sup {
+	position: relative;
+	font-size: 75%;
+	line-height: 0;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+sup {
+	top: -0.5em;
+}
+
+table {
+	width: 100%;
+	border-color: currentColor;
+	border-collapse: collapse; // Убираем двойные границы
+	border-spacing: 0; // Убираем пробелы между ячейками
+}
+
+td,
+th {
+	padding: 0;
+	text-align: left;
+	vertical-align: top;
+}
+
+// /** Удаляем все анимации и переходы для людей, которые предпочитают их не использовать */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	::before,
+	::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

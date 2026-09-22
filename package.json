@@ -1,0 +1,32 @@
+{
+	"name": "teaboom",
+	"version": "1.0.0",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"dev": "gulp",
+		"build": "gulp build"
+	},
+	"devDependencies": {
+		"@babel/preset-env": "7.28.3",
+		"autoprefixer": "10.4.20",
+		"babel-loader": "10.0.0",
+		"browser-sync": "3.0.3",
+		"del": "8.0.1",
+		"gulp": "5.0.0",
+		"gulp-csso": "4.0.1",
+		"gulp-postcss": "10.0.0",
+		"gulp-prettier": "6.0.0",
+		"gulp-rename": "2.1.0",
+		"gulp-sass": "5.1.0",
+		"postcss": "8.5.3",
+		"postcss-pxtorem": "6.1.0",
+		"postcss-combine-media-query": "1.0.1",
+		"postcss-sort-media-queries": "5.2.0",
+		"sass": "1.77.6",
+		"webpack-stream": "7.0.0"
+	},
+	"dependencies": {
+		"jquery": "3.7.1"
+	}
+}

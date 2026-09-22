@@ -1,0 +1,199 @@
+@use "sass:math";
+@use "./settings" as *;
+@use "./helpers/_mixins" as *;
+
+.hidden {
+	display: none !important;
+}
+
+html {
+	@media (min-width: $fullhd) {
+		font-size: 0.8333333333vw;
+	}
+}
+
+.lock-page {
+	overflow: hidden;
+	touch-action: none;
+}
+
+body {
+	font-size: clamp(0.875rem, 0.845rem + 0.129vw, 1rem);
+	font-weight: 400;
+	font-style: normal;
+	line-height: 1.2;
+
+	.lock & {
+		@extend .lock-page;
+	}
+}
+
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	@supports (overflow: clip) {
+		overflow: clip;
+	}
+
+	@supports not (overflow: clip) {
+		overflow: hidden;
+	}
+
+	// Прижимаем footer
+	> .page,
+	> main,
+	> main.page {
+		flex: 1 1 auto;
+	}
+
+	> footer {
+	}
+}
+
+// Фикс для слайдеров
+:has(.swiper) {
+	min-width: 0;
+}
+
+.container,
+[class*="__container"] {
+	width: 100%;
+	max-width: calc(var(--container-width) + var(--container-padding-x, 16px) * 2);
+	margin-inline: auto;
+	padding-inline: var(--container-padding-x, 16px);
+}
+
+h1,
+.h1 {
+	font-size: clamp(1.25rem, 1.068rem + 0.777vw, 2rem);
+}
+
+.header,
+.footer {
+	background-color: var(--accent-color);
+	padding-block: 10px;
+}
+
+.header {
+	border-bottom: 1px solid var(--light-grey);
+}
+
+.footer {
+	border-top: 1px solid var(--light-grey);
+}
+
+.page {
+	--page-head-margin-top: 24px;
+	--page-head-margin-between: 24px;
+	--page-head-margin-bottom: 40px;
+
+	@media (max-width: $hd) {
+		--page-head-margin-top: 8px;
+		--page-head-margin-between: 16px;
+		--page-head-margin-bottom: 24px;
+	}
+
+	// .page__head
+	&__head {
+		margin-top: var(--page-head-margin-top);
+	}
+
+	// .page__breadcrumbs
+	&__breadcrumbs {
+		margin-top: var(--page-head-margin-top);
+		margin-bottom: var(--page-head-margin-between);
+	}
+
+	// .page__area
+	&__area {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		margin-top: var(--page-head-margin-between);
+		margin-bottom: var(--page-head-margin-bottom);
+
+		@include media($hd) {
+			margin-top: var(--page-head-margin-top);
+		}
+	}
+
+	// .page__grid
+	&__grid {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+
+		@include media($hd, min) {
+			display: grid;
+			grid-template-columns: 1fr 268px;
+			column-gap: 30px;
+		}
+	}
+
+	// .page__title
+	&__title {
+		font-weight: bold;
+	}
+
+	// .page__side
+	&__side {
+	}
+
+	// .page__content
+	&__content {
+	}
+
+	// .page__body
+	&__body {
+		margin-bottom: 30px;
+	}
+}
+
+.page-side {
+	--page-aside-padding-x: 16px;
+	--page-aside-padding-y: 24px;
+
+	--page-aside-bg: var(--gray);
+	--page-aside-border: 1px solid red;
+
+	// .page-aside__inner
+	&__inner {
+		position: sticky;
+		top: calc(var(--header-height, 0rem) + 16px);
+	}
+}
+
+.redactor-content {
+	:where(& *) {
+		&:not(:last-child) {
+			margin-bottom: 1.8em;
+		}
+	}
+
+	ul,
+	ol {
+		list-style: initial;
+		padding-left: 2ch;
+
+		li {
+			&:not(:last-child) {
+				margin-bottom: 0.3125em;
+			}
+		}
+	}
+
+	ol {
+		list-style-type: decimal;
+	}
+
+	:is(h1, h2, h3, h4, h5, h6) {
+		margin-bottom: 0.3em;
+	}
+
+	h3 {
+		font-size: 24px;
+	}
+}

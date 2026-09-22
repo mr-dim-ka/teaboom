@@ -1,0 +1,76 @@
+@use "sass:math";
+@use "./vars" as *;
+@use "../settings" as *;
+
+@function rem($px, $current: 16) {
+	$result: math.div($px, $current) * 1rem;
+	@return $result;
+}
+
+@function em($px, $current: 16) {
+	$result: math.div($px, $current) * 1em;
+	@return $result;
+}
+
+// миксин для media запросов
+@mixin media($width, $type: max, $secondWidth: null) {
+	@if $type == "between" {
+		// Проверяем, что переданы оба значения
+		@if not $secondWidth {
+			@error "ОШИБКА! Для типа 'between' укажите два значения: min и max.";
+		}
+
+		// Проверяем, что min < max
+		@if $width >=$secondWidth {
+			@error "ОШИБКА! Первое значение (#{$width}) должно быть меньше второго (#{$secondWidth}).";
+		}
+
+		@media (min-width: $width) and (max-width: $secondWidth) {
+			@content;
+		}
+	} @else if $type ==min {
+		@media (min-width: $width) {
+			@content;
+		}
+	} @else if $type ==max {
+		@media (max-width: $width) {
+			@content;
+		}
+	} @else {
+		@error "ОШИБКА! Тип должен быть 'max', 'min' или 'between'.";
+	}
+}
+
+@mixin imgAndSvg {
+	.icon,
+	img,
+	svg {
+		@content;
+	}
+}
+
+@mixin visually-hidden {
+	position: absolute !important;
+	width: rem(1) !important;
+	height: rem(1) !important;
+	margin: rem(-1) !important;
+	border: 0 !important;
+	padding: 0 !important;
+	white-space: nowrap !important;
+	clip-path: inset(100%) !important;
+	clip: rect(0 0 0 0) !important;
+	overflow: hidden !important;
+}
+
+@mixin hideScrollbar {
+	// Стандартные свойства
+	-ms-overflow-style: none !important; // IE и старый Edge
+	scrollbar-width: none !important; // Firefox
+
+	// WebKit браузеры
+	&::-webkit-scrollbar {
+		display: none !important;
+		width: 0 !important;
+		height: 0 !important;
+	}
+}

@@ -1,0 +1,74 @@
+@use "./settings" as *;
+@use "./helpers/_mixins" as *;
+
+.breadcrumbs {
+	--bread-decor-size: 4px;
+
+	--bread-space-items: 4px 8px;
+	--bread-space-item: 0px 8px;
+
+	--bread-font-size: 14px;
+
+	// .breadcrumbs__list
+	&__list {
+		@include hideScrollbar;
+
+		overflow: auto hidden;
+		display: flex;
+		align-items: center;
+		gap: var(--bread-space-items);
+
+		@include media($hd, min) {
+			flex-wrap: wrap;
+		}
+
+		@include media($hd) {
+			margin: 0 calc(var(--container-padding-x) * -1);
+			padding: 0 var(--container-padding-x);
+		}
+	}
+
+	// .breadcrumbs__item
+	&__item {
+		display: flex;
+		align-items: center;
+		gap: var(--bread-space-item);
+		font-size: var(--bread-font-size);
+		color: var(--gray);
+
+		&:not(:last-child) {
+			&::after {
+				content: "-";
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: var(--bread-decor-size);
+				height: 1px;
+				flex: 0 0 var(--bread-decor-size);
+			}
+		}
+	}
+
+	// .breadcrumbs__link
+	&__link {
+		display: inline-flex;
+		align-items: center;
+		white-space: nowrap;
+		transition: color var(--transition-duration);
+
+		@media (any-hover: hover) {
+			&:hover {
+				color: var(--main-color);
+			}
+		}
+	}
+
+	// .breadcrumbs__current
+	&__current {
+		display: inline-block;
+		pointer-events: none;
+		user-select: none;
+		white-space: nowrap;
+	}
+}
